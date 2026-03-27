@@ -1,0 +1,2 @@
+Abre o código do ojeto criado diretamente no vscode (pelo terminal)
+code .
