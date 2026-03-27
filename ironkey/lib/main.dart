@@ -34,6 +34,8 @@ class _IronKeyScreenState extends State<IronKeyScreen> {
   final TextEditingController _passwordController =
       TextEditingController(); //criação de uma variavel com _ significa que ela é privada
 
+  int maxCharacters = 12;
+
   @override
   void initState() {
     super.initState();
@@ -64,7 +66,7 @@ class _IronKeyScreenState extends State<IronKeyScreen> {
     final random = Random();
     setState(() {
       _passwordController.text = List.generate(
-        12,
+        maxCharacters,
         (_) => chars[random.nextInt(chars.length)],
       ).join();
     });
@@ -74,55 +76,65 @@ class _IronKeyScreenState extends State<IronKeyScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: Column(
-                children: [
-                  ClipOval(
-                    child: SizedBox(
-                      width: 150,
-                      height: 150,
-                      child: Image.asset(
-                        "assets/images/ironman.jpg",
-                        fit: BoxFit.fill,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              Expanded(
+                child: Column(
+                  children: [
+                    ClipOval(
+                      child: SizedBox(
+                        width: 150,
+                        height: 150,
+                        child: Image.asset(
+                          "assets/images/ironman.jpg",
+                          fit: BoxFit.fill,
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 16),
-                  Text(
-                    "Sua senha segura",
-                    textAlign: TextAlign.center,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-                  ),
-                  SizedBox(height: 16),
-                  TextField(
-                    controller: _passwordController,
-                    decoration: InputDecoration(
-                      labelText: "Password",
-                      border: OutlineInputBorder(),
-                      prefixIcon: Icon(Icons.lock),
-                      suffixIcon: _passwordController.text.isNotEmpty
-                          ? IconButton(
-                              onPressed: () {
-                                copyPassword(_passwordController.text);
-                              },
-                              icon: Icon(Icons.copy),
-                            )
-                          : null,
+                    SizedBox(height: 16),
+                    Text(
+                      "Sua senha segura",
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                      ),
                     ),
-                  ),
-                  Text(_passwordController.text),
-                ],
+                    SizedBox(height: 16),
+                    TextField(
+                      controller: _passwordController,
+                      maxLength: maxCharacters,
+                      decoration: InputDecoration(
+                        labelText: "Password",
+                        border: OutlineInputBorder(),
+                        prefixIcon: Icon(Icons.lock),
+                        suffixIcon: _passwordController.text.isNotEmpty
+                            ? IconButton(
+                                onPressed: () {
+                                  copyPassword(_passwordController.text);
+                                },
+                                icon: Icon(Icons.copy),
+                              )
+                            : null,
+                      ),
+                    ),
+                    Text(_passwordController.text),
+                  ],
+                ),
               ),
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: FilledButton(onPressed: () {}, child: Text("Gerar senha")),
-            ),
-          ],
+              SizedBox(
+                width: double.infinity,
+                child: FilledButton(
+                  onPressed: generatePassword,
+                  child: Text("Gerar senha"),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
