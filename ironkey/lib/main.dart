@@ -3,6 +3,10 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ironkey/app_theme.dart';
+import 'package:ironkey/password_generator.dart';
+import 'package:ironkey/password_type_enum.dart';
+import 'package:ironkey/pin_password_generator.dart';
+import 'package:ironkey/standard_password_generator.dart';
 
 void main() {
   runApp(IronKeyApp());
@@ -35,6 +39,9 @@ class _IronKeyScreenState extends State<IronKeyScreen> {
       TextEditingController(); //criação de uma variavel com _ significa que ela é privada
 
   int maxCharacters = 12;
+  bool isEditable = false;
+
+  PasswordTypeEnum passwordTypeSelected = PasswordTypeEnum.pin;
 
   @override
   void initState() {
@@ -58,22 +65,41 @@ class _IronKeyScreenState extends State<IronKeyScreen> {
   }
 
   void generatePassword() {
-    const upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const lower = "abcdefghijklmnopqrstuvwxyz";
-    const numbers = "0123456789";
-    const symbols = "!@#\$%&*";
-    final chars = upper + lower + numbers + symbols;
-    final random = Random();
+    final PasswordGenerator generator;
+
+    switch (passwordTypeSelected) {
+      case PasswordTypeEnum.pin:
+        generator = PinPasswordGenerator();
+        break;
+
+      case PasswordTypeEnum.standard:
+        generator = StandardPasswordGenerator();
+        break;
+    }
+
     setState(() {
-      _passwordController.text = List.generate(
-        maxCharacters,
-        (_) => chars[random.nextInt(chars.length)],
-      ).join();
+      _passwordController.text = generator.generate(maxCharacters);
     });
+
+    // const upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    // const lower = "abcdefghijklmnopqrstuvwxyz";
+    // const numbers = "0123456789";
+    // const symbols = "!@#\$%&*";
+    // final chars = upper + lower + numbers + symbols;
+    // final random = Random();
+    // setState(() {
+    //   _passwordController.text = List.generate(
+    //     maxCharacters,
+    //     (_) => chars[random.nextInt(chars.length)],
+    //   ).join();
+    // });
   }
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -106,6 +132,7 @@ class _IronKeyScreenState extends State<IronKeyScreen> {
                     ),
                     SizedBox(height: 16),
                     TextField(
+                      enabled: isEditable,
                       controller: _passwordController,
                       maxLength: maxCharacters,
                       decoration: InputDecoration(
@@ -122,7 +149,60 @@ class _IronKeyScreenState extends State<IronKeyScreen> {
                             : null,
                       ),
                     ),
-                    Text(_passwordController.text),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text("Tipo de senha"),
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: RadioListTile(
+                            value: PasswordTypeEnum.pin,
+                            groupValue: passwordTypeSelected,
+                            title: Text("PIN"),
+                            onChanged: (value) {
+                              setState(() {
+                                passwordTypeSelected =
+                                    value!; // ! significa que a variavel não pode ser nula
+                              });
+                            },
+                          ),
+                        ),
+                        Expanded(
+                          child: RadioListTile(
+                            value: PasswordTypeEnum.standard,
+                            groupValue: passwordTypeSelected,
+                            title: Text("Senha padrão"),
+                            onChanged: (value) {
+                              setState(() {
+                                passwordTypeSelected = value!;
+                              });
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    Divider(color: colorScheme.outline),
+                    SizedBox(height: 20),
+
+                    if (isEditable) Text("estou no modo de edição"),
+
+                    Row(
+                      children: [
+                        Icon(isEditable ? Icons.lock_open : Icons.lock),
+                        SizedBox(width: 8),
+                        Expanded(child: Text("Permitir a edição de senha?")),
+                        Switch(
+                          value: isEditable,
+                          onChanged: (value) {
+                            setState(() {
+                              isEditable = value;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
