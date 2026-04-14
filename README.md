@@ -1,42 +1,44 @@
-# 📱 3SIS CPD Sem 1 - Desenvolvimento Cross-Platform
+# 📱 3SIS CPD Sem 1 - Cross-Platform Development
 
-> Repositório criado como portfólio e apostila de estudos práticos para a disciplina de Desenvolvimento Cross-Platform. Os projetos e laboratórios aqui presentes exploram o ecossistema **Flutter** e a linguagem **Dart**.
+> Repository created as a portfolio and practical study notebook for the Cross-Platform Development course. The projects and labs found here explore the **Flutter** ecosystem and the **Dart** programming language.
 
 ![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)
 ![Dart](https://img.shields.io/badge/dart-%230175C2.svg?style=for-the-badge&logo=dart&logoColor=white)
 
-## 🎯 Objetivo do Repositório
-Este espaço serve como um registro vivo do meu aprendizado na criação de aplicativos móveis multiplataforma. O repositório é composto por projetos de maior complexidade arquitetural e pequenos laboratórios focados em dominar os fundamentos de UI/UX, gerenciamento de estado e lógica de programação.
+## 🎯 Repository Objective
+This space serves as a living record of my learning journey in creating cross-platform mobile applications. The repository consists of architecturally complex projects alongside smaller labs focused on mastering the fundamentals of UI/UX, state management, and programming logic.
 
 ---
 
-## ⭐ Projetos em Destaque
+## ⭐ Featured Projects
 
 ### 🔐 [IronKey](./ironkey)
-Um gerador de senhas seguras personalizáveis e interativo. Este é um dos projetos mais completos do repositório, focado na separação de responsabilidades e regras de negócio.
-* **Arquitetura & OOP:** Utilização de abstrações e interfaces para os geradores de senha (`StandardPasswordGenerator` e `PinPasswordGenerator`).
-* **Gerenciamento de Estado:** Telas reativas baseadas em `StatefulWidget` com controle de formulários (`TextEditingController`).
-* **UI/UX:** Suporte a Light/Dark theme automáticos (`AppTheme`), botões de cópia para a área de transferência (`Clipboard`), feedback visual com `ScaffoldMessenger` (SnackBars) e Material Design 3.
-* **Lógica:** Implementação de `Enums` (`PasswordTypeEnum`) para o controle seguro do tipo de senha selecionado pelo usuário.
+A customizable and interactive secure password generator. This is one of the most comprehensive projects in the repository, focused on separation of concerns and business rules.
+* **Architecture & OOP:** Use of abstractions and interfaces for password generators (`StandardPasswordGenerator` and `PinPasswordGenerator`).
+* **State Management:** Reactive screens based on `StatefulWidget` with form control (`TextEditingController`).
+* **UI/UX:** Automatic Light/Dark theme support (`AppTheme`), clipboard copy buttons (`Clipboard`), visual feedback via `ScaffoldMessenger` (SnackBars), and Material Design 3.
+* **Logic:** Implementation of `Enums` for safe control of the selected password type.
 
 ---
 
-## 📚 Laboratórios e Exercícios Práticos
+## 📚 Labs and Practical Exercises
 
-Além dos destaques acima, as demais pastas deste repositório (como jogos interativos e simuladores) contêm aplicações focadas em fixar conceitos essenciais do Flutter. Sinta-se à vontade para explorar os diretórios! 
+Beyond the highlights above, the other folders in this repository contain applications focused on solidifying essential Flutter concepts in an isolated and gamified way. Feel free to explore the directories! 
 
-Nesses módulos, você encontrará implementações de:
-- **Componentização:** Criação de *Stateless* e *Stateful Widgets* reutilizáveis.
-- **Estruturação de Layout:** Domínio sobre `Row`, `Column`, `Expanded`, `Stack` e `SafeArea`.
-- **Interatividade:** Captura de eventos do usuário via `GestureDetector`, botões e switches.
-- **Manipulação de Mídia:** Exibição de assets locais (imagens) e formatação dinâmica.
+* **[Appiadas](./appiadas):** A random joke generator app. An excellent lab for practicing screen mutability with `setState`, using Dart's math library (`dart:math`) for list randomization, and advanced layout styling using `BoxDecoration` with background images (`AssetImage`).
+* **[Jokenpokemon](./Jokenpokemon):** A classic rock-paper-scissors game with a Pokémon theme, focused on UI componentization (separating the Header, Logo, and Arena into generic files) and building custom data models via Object-Oriented Programming.
+
+**General skills practiced in these modules:**
+- **Componentization:** Creating reusable *Stateless* and *Stateful Widgets*.
+- **Layout Structuring:** Mastery of `Row`, `Column`, `Expanded`, `Container`, and screen flexibility.
+- **Interactivity:** Capturing events via custom buttons (`ElevatedButton.styleFrom`) and gestures.
 
 ---
 
-## 🚀 Como executar os projetos localmente
+## 🚀 How to run the projects locally
 
-Para rodar qualquer um dos aplicativos na sua máquina, certifique-se de ter o [Flutter SDK](https://docs.flutter.dev/get-started/install) instalado.
+To run any of the applications on your machine, make sure you have the [Flutter SDK](https://docs.flutter.dev/get-started/install) installed.
 
-1. Clone o repositório:
+1. Clone the repository:
    ```bash
    git clone [https://github.com/HpBtw/3SIS-CPD_Sem1.git](https://github.com/HpBtw/3SIS-CPD_Sem1.git)
