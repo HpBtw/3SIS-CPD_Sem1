@@ -30,8 +30,10 @@ class JokenpokemonLogo extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 32.0),
       child: Image(
-        image: Image.asset("images/logo_pokemon.png").image, // descobrir o que é isso depois
-        height: 200
+        image: Image.asset(
+          "images/logo_pokemon.png",
+        ).image, // descobrir o que é isso depois
+        height: 200,
       ),
     );
   }

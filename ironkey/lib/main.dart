@@ -120,7 +120,7 @@ class _IronKeyScreenState extends State<IronKeyScreen> {
             children: [
               Expanded(
                 child: SingleChildScrollView(
-                  child: Column(
+                  child: Column(  
                     children: [
                       ClipOval(
                         child: SizedBox(
